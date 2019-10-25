@@ -11,8 +11,11 @@
 + 引入了[vue-cookies](https://www.npmjs.com/package/vue-cookies)
 + 引入了[element-ui](https://element.eleme.cn/#/zh-CN/component/layout)
   - 创建了自定义主题文件`ROOT/src/element-variables.scss` ,[具体参数](https://github.com/ElemeFE/element/blob/dev/packages/theme-chalk/src/common/var.scss)
-+ 使用[image-webpack-loader](https://www.npmjs.com/package/image-webpack-loader)进行图片压缩
-+ 使用[babel-plugin-transform-remove-console](https://www.npmjs.com/package/babel-plugin-transform-remove-console)去除线上console
++ 图片压缩
++ 去除生产环境console
++ 添加了修改项目默认css的文件（ROOT/src/assets/css/reset.css）
++ 增加了基础的mixins(ROOT/src/assets/css/mixins.scss)和项目全局css变量（ROOT/src/assets/css/var.scss）
++ var.scss 和 mixins.scss 已添加到全局，无需引用
 
 ### 开发规范
 

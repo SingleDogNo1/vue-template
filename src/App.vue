@@ -4,6 +4,7 @@
     <br />
     <el-button>el-button</el-button>
     <HelloWorld :msg="msg" />
+    <div id="example">这个元素的样式由sass操作并且保存到了全局</div>
   </div>
 </template>
 
@@ -35,4 +36,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+#example {
+  @include radiusCube(300px);
+  padding: 50px;
+  background: $--test-color-red;
+  color: $--test-color-white;
+  @include center;
+}
+</style>

@@ -1,4 +1,5 @@
 const env = process.env
+const path = require('path')
 function kbs(num) {
   return num * 1024
 }
@@ -16,6 +17,16 @@ module.exports = {
     disableHostCheck: true
   },
   chainWebpack: config => {
+    config.module
+      .rule('sass-resources')
+      .test(/\.(scss|sass)$/)
+      .use('sass-resources-loader')
+      .loader('sass-resources-loader')
+      .options({
+        resources: [path.resolve(__dirname, 'src/assets/css/var.scss'), path.resolve(__dirname, 'src/assets/css/mixins.scss')]
+      })
+      .end()
+
     if (env.NODE_ENV === 'production') {
       const imageRule = config.module.rule('images')
       imageRule.uses.clear()

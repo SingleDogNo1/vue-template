@@ -1,0 +1,219 @@
+
+@mixin bg-image($name) {
+  background-repeat: no-repeat;
+  background-image: url($name + '@2x.png');
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    background-image: url($name + '@3x.png');
+  }
+}
+
+@mixin border-bottom-1px($color) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid $color;
+    content: ' ';
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+      transform: scaleY(0.7);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+      transform: scaleY(0.33);
+    }
+  }
+}
+
+@mixin border-top-1px($color) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-top: 1px solid $color;
+    content: ' ';
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+      transform: scaleY(0.7);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+      transform: scaleY(0.33);
+    }
+  }
+}
+
+@mixin border-top-bottom-1px($color) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 200%;
+    border-top: 1px solid $color;
+    border-bottom: 1px solid $color;
+    content: ' ';
+    transform: scaleY(0.5);
+    transform-origin: 0 0;
+  }
+}
+@mixin border-right-left-1px($color) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    border-right: 1px solid $color;
+    border-left: 1px solid $color;
+    content: ' ';
+    transform: scaleX(0.5);
+    transform-origin: 0 0;
+  }
+}
+
+@mixin border-right-1px($color) {
+  position: relative;
+  &:before {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    border-right: 1px solid $color;
+    content: ' ';
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+      transform: scaleX(0.7);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+      transform: scaleX(0.5);
+    }
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+      transform: scaleX(0.33);
+    }
+  }
+}
+
+@mixin border-1px($color) {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid $color;
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: left top;
+  }
+}
+
+@mixin border-1px-radius($color) {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid $color;
+    box-sizing: border-box;
+    border-radius: 50%;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: left top;
+  }
+}
+
+@mixin btn-linear-gradient-v($color1, $color2) {
+  background-image: linear-gradient(-180deg, $color1 0%, $color2 100%);
+  box-shadow: 0 2px 4px 0 rgba(238, 198, 0, 0.3);
+  border-radius: 10000px;
+}
+
+// 单行文本超出显示省略号
+@mixin no-wrap() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 多行文本超出显示省略号
+@mixin no-wrap-multi($n) {
+  //display: flex;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $n; // 可显示行数
+}
+
+// 扩展点击区域
+@mixin extend-click() {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+@mixin cube($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+/**
+  * 圆角宏
+  * 如果只传入一个参数，生成正圆(circle)
+  * @param $width 圆角盒模型宽
+  * @param $height 圆角盒模型高
+  */
+@mixin radiusCube($width, $height: $width) {
+  @include cube($width, $height);
+  @if ($width > $height) {
+    border-radius: $height / 2;
+  } @else {
+    border-radius: $width / 2;
+  }
+}
+
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin positionCenter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
