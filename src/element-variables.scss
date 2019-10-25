@@ -1,0 +1,10 @@
+/*
+ 自定义主题色
+ https://github.com/ElemeFE/element/blob/dev/packages/theme-chalk/src/common/var.scss
+ */
+$--color-primary: red;
+
+/* 自定义图标库路径（默认element-ui图标，必须定义） */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
