@@ -12,3 +12,7 @@
 + 引入了[element-ui](https://element.eleme.cn/#/zh-CN/component/layout)
   - 创建了自定义主题文件`ROOT/src/element-variables.scss` ,[具体参数](https://github.com/ElemeFE/element/blob/dev/packages/theme-chalk/src/common/var.scss)
 + 使用[image-webpack-loader](https://www.npmjs.com/package/image-webpack-loader)进行图片压缩
++ 使用[babel-plugin-transform-remove-console](https://www.npmjs.com/package/babel-plugin-transform-remove-console)去除线上console
+
+### 开发规范
+
