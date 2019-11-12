@@ -16,6 +16,7 @@
 + 添加了修改项目默认css的文件（ROOT/src/assets/css/reset.css）
 + 增加了基础的mixins(ROOT/src/assets/css/mixins.scss)和项目全局css变量（ROOT/src/assets/css/var.scss）
 + var.scss 和 mixins.scss 已添加到全局，无需引用
++ 使用[vue-lazyload](https://www.npmjs.com/package/vue-lazyload)处理图片懒加载，配置在`main.js`, loading和error占位图自行补充
 
 ### 开发规范
 
