@@ -1,5 +1,7 @@
 const env = process.env
 const path = require('path')
+const fs = require('fs')
+
 function kbs(num) {
   return num * 1024
 }
@@ -8,6 +10,13 @@ module.exports = {
   publicPath: env.NODE_ENV === 'production' ? './' : '/',
   productionSourceMap: false,
   configureWebpack: () => ({
+    externals: {
+      vue: 'Vue',
+      'vue-router': 'VueRouter',
+      vuex: 'Vuex',
+      axios: 'axios',
+      'element-ui': 'ELEMENT'
+    },
     optimization: {
       splitChunks: {
         cacheGroups: {
@@ -42,10 +51,6 @@ module.exports = {
       }
     }
   }),
-  devServer: {
-    host: '0.0.0.0',
-    disableHostCheck: true
-  },
   chainWebpack: config => {
     config.module
       .rule('sass-resources')
@@ -80,6 +85,18 @@ module.exports = {
         .use('image-webpack-loader')
         .loader('image-webpack-loader')
         .options({ disable: false })
+    }
+  },
+  devServer: {
+    host: '0.0.0.0',
+    disableHostCheck: true,
+    before(app) {
+      app.get('/test/api', (req, res) => {
+        fs.readFile(path.resolve(__dirname, 'mockData/user.json'), 'utf-8', (error, data) => {
+          if (error) throw err
+          res.json(JSON.parse(data))
+        })
+      })
     }
   }
 }

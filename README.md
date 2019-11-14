@@ -8,7 +8,7 @@
 + 使用git-hook && lint-staged 作为git提交规范工具
 + **所有配置都放到对应的配置文件中**
 + 使用[normalize.css](https://www.npmjs.com/package/normalize.css)作为css reset
-+ 引入了[vue-cookies](https://www.npmjs.com/package/vue-cookies)
++ 引入了[vue-cookies](https://www.npmjs.com/package/vue-cookies),之后的使用可以使用`this.$cookies`
 + 引入了[element-ui](https://element.eleme.cn/#/zh-CN/component/layout)
   - 创建了自定义主题文件`ROOT/src/element-variables.scss` ,[具体参数](https://github.com/ElemeFE/element/blob/dev/packages/theme-chalk/src/common/var.scss)
 + 图片压缩
@@ -17,6 +17,30 @@
 + 增加了基础的mixins(ROOT/src/assets/css/mixins.scss)和项目全局css变量（ROOT/src/assets/css/var.scss）
 + var.scss 和 mixins.scss 已添加到全局，无需引用
 + 使用[vue-lazyload](https://www.npmjs.com/package/vue-lazyload)处理图片懒加载，配置在`main.js`, loading和error占位图自行补充
++ 使用cdn引入Vue、VueRouter、Vuex、axios、ElementUI，减少vendor.js体积
++ 基于axios配置了基础的请求文件,根据实际开发场景做具体的修整
 
 ### 开发规范
+- 参照`src/api/HelloWorld.js` 示例, **坚决禁止request模块挂载到Vue示例直接调用**，所有请求都放到api模块下管理，以便后期维护
+- 参照`src/utils/request.js`,所有和环境相关的变量都放到.env.*文件中，同样为了后期方便维护。
+- 所有的页面放在`src/views`文件夹中,所有组件放在`views/components`里，**每个组件/视图都是一个单独的文件夹**，示例
+```
+src
+  - components
+  ---- HelloWorld
+  ------- index.vue
+  ------- images
+  ------- other static files(font/audio/video...)
+  - views
+  ---- Home
+  ------- index.vue
+  ------- images
+  ------- other static files(font/audio/video...)
+```
+这样写的好处在于可以单独存放模块本身的资源文件，比如home.jpg图片只在home页面用到了，就把这张图片放在模块自己的images中，方便管理
+- 所有的组件/页面命名**必须使用首字母大写的驼峰形式**，没有为什么，这是规定
+- 结合上一条,只有多个页面公用的图像、字体、视频、音频...等静态资源才可以存放到assets文件中
+- assets中，js文件夹下只能存放较大的第三方组件或插件，自己定义的公用方法只能存放在`vue-mixins`文件夹中，作为全局的vue mixins使用，或者放在`utils`文件夹中调用
+- 所有的路由都要加上`webpackChunkName`,打包时会显示具体的文件名
+- 可以使用webpack开启本地服务，参考HelloWorld.js如何获取个人信息 && vue.config.js如何创建本地服务。需要mock的数据放在根目录mockData目录下，或者使用mock.js
 
