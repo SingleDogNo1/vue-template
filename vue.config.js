@@ -8,7 +8,7 @@ function kbs(num) {
 
 module.exports = {
   publicPath: env.NODE_ENV === 'production' ? './' : '/',
-  productionSourceMap: false,
+  productionSourceMap: env.VUE_APP_RUNTIME_ENV === 'production',
   configureWebpack: () => ({
     externals: {
       vue: 'Vue',
@@ -65,7 +65,7 @@ module.exports = {
       })
       .end()
 
-    if (env.NODE_ENV === 'production') {
+    if (env.VUE_APP_RUNTIME_ENV === 'production') {
       const imageRule = config.module.rule('images')
       imageRule.uses.clear()
       imageRule

@@ -43,4 +43,11 @@ src
 - assets中，js文件夹下只能存放较大的第三方组件或插件，自己定义的公用方法只能存放在`vue-mixins`文件夹中，作为全局的vue mixins使用，或者放在`utils`文件夹中调用
 - 所有的路由都要加上`webpackChunkName`,打包时会显示具体的文件名
 - 可以使用webpack开启本地服务，参考HelloWorld.js如何获取个人信息 && vue.config.js如何创建本地服务。需要mock的数据放在根目录mockData目录下，或者使用mock.js
+- 分环境打包，默认添加了三个环境 development、test、production ，按照VUE_APP_RUNTIME_ENV区分打包的环境做一些配置，现有的配置
+  + test环境不做图片压缩
+  + test环境不做console删除
+  + test环境不删除sourceMap
 
+- **最后也是最重要的一点，每次迭代必须把需求变更和版本号维护到README.md文档中**，如果没有添加，造成任何后果自负
+
+### 最后附上项目脚手架目录结构
