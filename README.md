@@ -52,6 +52,7 @@ src
   + test环境不做图片压缩
   + test环境不做console删除
   + test环境不删除sourceMap
+  + test环境不做gzip压缩
 
 - **最后也是最重要的一点，每次迭代必须把需求变更和版本号维护到README.md文档中**，如果没有添加，造成任何后果自负
 
