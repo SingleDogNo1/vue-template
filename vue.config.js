@@ -1,6 +1,7 @@
 const env = process.env
 const path = require('path')
 const fs = require('fs')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 function kbs(num) {
   return num * 1024
@@ -49,7 +50,12 @@ module.exports = {
           }
         }
       }
-    }
+    },
+    plugins: [
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false
+      })
+    ]
   }),
   chainWebpack: config => {
     config.module
