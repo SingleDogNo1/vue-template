@@ -25,7 +25,7 @@
 + 基于axios配置了基础的请求文件,根据实际开发场景做具体的修整
 
 ### 开发规范
-- 参照`src/api/HelloWorld.js` 示例, **坚决禁止request模块挂载到Vue示例直接调用**，所有请求都放到api模块下管理，以便后期维护
+- 参照`src/api/HelloWorld.js` 示例, **坚决禁止request模块挂载到Vue实例直接调用**，所有请求都放到api模块下管理，以便后期维护
 - 参照`src/utils/request.js`,所有和环境相关的变量都放到.env.*文件中，同样为了后期方便维护。
 - 所有的页面放在`src/views`文件夹中,所有组件放在`views/components`里，**每个组件/视图都是一个单独的文件夹**，示例
 ```
