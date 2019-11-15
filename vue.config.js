@@ -2,10 +2,8 @@ const env = process.env
 const path = require('path')
 const fs = require('fs')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-
-function kbs(num) {
-  return num * 1024
-}
+const CompressionPlugin = require('compression-webpack-plugin')
+const kbs = num => num * 1024
 
 module.exports = {
   publicPath: env.NODE_ENV === 'production' ? './' : '/',
@@ -50,12 +48,7 @@ module.exports = {
           }
         }
       }
-    },
-    plugins: [
-      new BundleAnalyzerPlugin({
-        openAnalyzer: false
-      })
-    ]
+    }
   }),
   chainWebpack: config => {
     config.module
@@ -70,6 +63,10 @@ module.exports = {
         ]
       })
       .end()
+
+    if (env.NODE_ENV === 'production') {
+      config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin)
+    }
 
     if (env.VUE_APP_RUNTIME_ENV === 'production') {
       const imageRule = config.module.rule('images')
@@ -91,6 +88,14 @@ module.exports = {
         .use('image-webpack-loader')
         .loader('image-webpack-loader')
         .options({ disable: false })
+
+      config.plugin('compression-webpack-plugin').use(CompressionPlugin, [
+        {
+          algorithm: 'gzip',
+          test: new RegExp(/\.(css|scss|sass|js|vue)$/i),
+          threshold: kbs(10)
+        }
+      ])
     }
   },
   devServer: {
