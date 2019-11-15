@@ -1,6 +1,8 @@
 ## vue-cli 开发模板
 ### 脚手架默认添加功能
 
+> edit by singleDogNo.1 in 2019-11-15
+
 + 默认添加了vue-router && vuex
 + 使用.editorconfig统一编辑格式
 + 使用[node-sass](https://lost-dream.github.io/blog/2017/10/20/使用SASS/)作为css预处理器
@@ -41,6 +43,7 @@ src
 - 所有的组件/页面命名**必须使用首字母大写的驼峰形式**，没有为什么，这是规定
 - 结合上一条,只有多个页面公用的图像、字体、视频、音频...等静态资源才可以存放到assets文件中
 - assets中，js文件夹下只能存放较大的第三方组件或插件，自己定义的公用方法只能存放在`vue-mixins`文件夹中，作为全局的vue mixins使用，或者放在`utils`文件夹中调用
+- 每个*.vue文件有且只能有一个`style`标签块，并且必须加上`scoped`，如果有公用的style，按照复用程度放在父组件或者`assets/css/reset.css`中
 - 所有的路由都要加上`webpackChunkName`,打包时会显示具体的文件名
 - 可以使用webpack开启本地服务，参考HelloWorld.js如何获取个人信息 && vue.config.js如何创建本地服务。需要mock的数据放在根目录mockData目录下，或者使用mock.js
 - 分环境打包，默认添加了三个环境 development、test、production ，按照VUE_APP_RUNTIME_ENV区分打包的环境做一些配置，现有的配置
@@ -51,3 +54,51 @@ src
 - **最后也是最重要的一点，每次迭代必须把需求变更和版本号维护到README.md文档中**，如果没有添加，造成任何后果自负
 
 ### 最后附上项目脚手架目录结构
+```
+│  .env.development // 开发环境变量配置文件
+│  .env.production // 生产环境变量配置文件
+│  .env.test // 测试环境变量配置文件
+│  .eslintrc.js // eslint配置文件
+│  .prettierrc // prettier规则配置文件
+│  vue.config.js // vue项目配置文件
+├─mockData // 本地mock数据存放
+│   user.json
+├─public
+│   favicon.ico // 网站title icon
+│   index.html // htmlWebpackPlugin template文件
+└─src
+    │  element-variables.scss // element-ui css配置
+    │  main.js
+    ├─api // 存放所有网络请求
+    │   HelloWorld.js
+    ├─assets
+    │  └─css
+    │      mixins.scss // sass mixins
+    │      reset.css // 项目自身的初始css
+    │      var.scss // 项目自身需要定义的任何sass变量
+    ├─components
+    │  └─HelloWorld
+    │      1.png
+    │      index.vue
+    │      test0.jpg
+    │      test1.jpg
+    │      test2.jpg
+    │      test3.jpg
+    ├─plugins
+    │   element.js
+    ├─router
+    │   index.js
+    ├─store
+    │   index.js
+    ├─utils
+    │   request.js
+    ├─views
+    │  ├─About
+    │  │   index.vue
+    │  └─Home
+    │      index.vue
+    └─vue-mixins // vue的mixins（名字区分于sass的mixins），可以在这里定义全局混入和局部混入规则
+        exampleMixins.js
+```
+
+### 熟悉脚手架后，所有HelloWorld相关的文件、初始的mockData、初始的vue-mixins都可以删除。

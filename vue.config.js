@@ -72,7 +72,7 @@ module.exports = {
         .use('url-loader')
         .loader('url-loader')
         .options({
-          limit: kbs(4),
+          limit: kbs(10),
           fallback: {
             loader: 'file-loader',
             options: {
