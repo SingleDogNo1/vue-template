@@ -53,6 +53,7 @@ src
   + test环境不做console删除
   + test环境不删除sourceMap
   + test环境不做gzip压缩
+  + development和test环境使用vue.js，生产环境使用vue.min.js，因为[vue-devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)（需翻墙）不支持生产环境文件调试
 
 - **最后也是最重要的一点，每次迭代必须把需求变更和版本号维护到README.md文档中**，如果没有添加，造成任何后果自负
 
