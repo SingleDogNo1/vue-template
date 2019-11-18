@@ -67,11 +67,16 @@
         <img v-lazy="item.src" />
       </li>
     </ul>
+    防抖函数示例 --- 1s
+    <input type="text" v-model="eg" />
+    <br />
+    <div>{{ egeg }}</div>
   </div>
 </template>
 
 <script>
 import { HelloWorld } from '@/api/HelloWorld'
+import { debounce } from '@/utils'
 import mixin from '@/vue-mixins/exampleMixins'
 export default {
   name: 'HelloWorld',
@@ -100,8 +105,15 @@ export default {
           src: require('./test3.jpg')
         }
       ],
-      exampleAxios: []
+      exampleAxios: [],
+      eg: '',
+      egeg: ''
     }
+  },
+  watch: {
+    eg: debounce(function(value) {
+      this.egeg = value
+    }, 1000)
   },
   methods: {
     async init() {
