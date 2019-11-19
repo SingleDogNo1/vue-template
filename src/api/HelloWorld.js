@@ -11,7 +11,11 @@ export function HelloWorld() {
 export function postRequestEG(data) {
   return request({
     url: 'testURL',
-    data: qs.stringify(data)
+    data: qs.stringify(data),
+    // 如果需要修改请求头
+    headers: {
+      foo: 'bar'
+    }
   })
 }
 
@@ -19,6 +23,10 @@ export function postRequestEG(data) {
 export function getRequestEG(params) {
   return request({
     url: 'testURL',
-    params: params
+    params: params,
+    // 如果需要修改请求头
+    headers: {
+      foo: 'bar'
+    }
   })
 }

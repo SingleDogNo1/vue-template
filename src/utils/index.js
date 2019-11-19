@@ -11,7 +11,8 @@ export {
   hex2RGB, // 16进制颜色转rgb
   RGB2Hex, // rgb转16进制
   debounce, // 防抖
-  throttle // 节流
+  throttle, // 节流
+  compare // 对象按照某个键值排序
 }
 
 // uuid() => "621dc209-1371-4602-97a5-04c913acc274"
@@ -132,7 +133,8 @@ function getQueryParameter(url = window.location.href, name) {
 // removeArrValue(['a', 'b', 'c'], 'b') => ['a', 'c']
 function removeArrValue(arr, val) {
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] == val) {
+    // 处理数字
+    if (arr[i].toString() == val.toString()) {
       arr.splice(i, 1)
       break
     }
@@ -174,4 +176,24 @@ function RGB2Hex(rgb) {
     hex += ('0' + Number(color[i]).toString(16)).slice(-2)
   }
   return hex
+}
+
+/**
+ * 对象按照某个键值排序
+ * @param {*} property 比对的参数
+ * @param {number} mode 升序 1 or 降序 -1
+ * @return {Function}
+ * @example
+ ** res = [{name: 'a', age: 20},{name: 'b', age: 10}]
+ ** res.sort(compare('age')) => [{name: 'b', age: 10},{name: 'a', age: 20}]
+ */
+function compare(property, mode = -1) {
+  return function(obj1, obj2) {
+    let [value1, value2] = [obj1[property], obj2[property]]
+    if (mode === 1) {
+      return value1 - value2
+    } else {
+      return value2 - value1
+    }
+  }
 }

@@ -11,6 +11,13 @@ import '@/assets/css/reset.css'
 import './plugins/element.js'
 import VueCookies from 'vue-cookies'
 import VueLazyload from 'vue-lazyload'
+// 挂载到全局方法 -- 删除所有的cookie
+VueCookies.removeAll = function() {
+  let cookiesKeys = this.keys()
+  for (let i = 0; i < cookiesKeys.length; i++) {
+    this.remove(cookiesKeys[i])
+  }
+}
 
 Vue.use(VueCookies)
 Vue.use(VueLazyload, {

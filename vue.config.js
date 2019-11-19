@@ -1,8 +1,8 @@
-const env = process.env
 const path = require('path')
-const fs = require('fs')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionPlugin = require('compression-webpack-plugin')
+const MockData = require('./mockData/mock')
+const env = process.env
 const kbs = num => num * 1024
 
 module.exports = {
@@ -102,12 +102,7 @@ module.exports = {
     host: '0.0.0.0',
     disableHostCheck: true,
     before(app) {
-      app.get('/test/api', (req, res) => {
-        fs.readFile(path.resolve(__dirname, 'mockData/user.json'), 'utf-8', (error, data) => {
-          if (error) throw err
-          res.json(JSON.parse(data))
-        })
-      })
+      MockData(app)
     }
   }
 }

@@ -11,6 +11,7 @@
 + **所有配置都放到对应的配置文件中**
 + 使用[normalize.css](https://www.npmjs.com/package/normalize.css)作为css reset
 + 引入了[vue-cookies](https://www.npmjs.com/package/vue-cookies),之后的使用可以使用`this.$cookies`
++ vue-cookies增加了removeAll方法，用来删除所有cookie。`this.$cookies.removeAll()`
 + 引入了[element-ui](https://element.eleme.cn/#/zh-CN/component/layout)
   - 创建了自定义主题文件`ROOT/src/element-variables.scss` ,[具体参数](https://github.com/ElemeFE/element/blob/dev/packages/theme-chalk/src/common/var.scss)
 + 图片压缩
@@ -22,7 +23,8 @@
 + 引入了[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)分析项目,`npm run serve`运行之后在8888端口可以查看项目具体结构
 + 在生产环境配置了gzip，该功能对体积大于10k的文件进一步压缩，得到\*\*.gz文件，**但是想要真正加载gzip文件，需要服务端进行相应的配置 -- 根据Request Headers的Accept-Encoding标签进行鉴别，如果支持gzip就返回 \*\*.gz文件**
 + 使用cdn引入Vue、VueRouter、Vuex、axios、ElementUI，减少vendor.js体积
-+ 基于axios配置了基础的请求文件,根据实际开发场景做具体的修整
++ 基于axios配置了基础的请求文件`/src/utils/request.js`,根据实际开发场景做具体的修整
++ 增加了几条验证规则`/src/utils/validate.js`
 
 ### 开发规范
 - 参照`src/api/HelloWorld.js` 示例, **坚决禁止request模块挂载到Vue实例直接调用**，所有请求都放到api模块下管理，以便后期维护
@@ -47,7 +49,7 @@ src
 - assets中，js文件夹下只能存放较大的第三方组件或插件，自己定义的公用方法只能存放在`vue-mixins`文件夹中，作为全局的vue mixins使用，或者放在`utils`文件夹中调用
 - 每个*.vue文件有且只能有一个`style`标签块，并且必须加上`scoped`，如果有公用的style，按照复用程度放在父组件或者`assets/css/reset.css`中
 - 所有的路由都要加上`webpackChunkName`,打包时会显示具体的文件名
-- 可以使用webpack开启本地服务，参考HelloWorld.js如何获取个人信息 && vue.config.js如何创建本地服务。需要mock的数据放在根目录mockData目录下，或者使用mock.js
+- 可以使用webpack开启本地服务，参考HelloWorld.js中的`userList`和`user`请求 && vue.config.js如何创建本地服务。需要mock的数据放在根目录mockData目录下，或者使用(mock.js)[https://github.com/nuysoft/Mock/wiki/Getting-Started]
 - 分环境打包，默认添加了三个环境 development、test、production ，按照VUE_APP_RUNTIME_ENV区分打包的环境做一些配置，现有的配置
   + test环境不做图片压缩
   + test环境不做console删除

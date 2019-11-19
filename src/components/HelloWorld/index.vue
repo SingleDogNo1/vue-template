@@ -28,12 +28,14 @@
     <ul>
       <li>
         <h1>
-          通过nodeJs可以启用本地服务，自己启用接口。配合mock.js可以保证不和server链条的情况下完成开发任务。下面的数据是从localhost:8080/test/api得到的
+          通过nodeJs可以启用本地服务，自己启用接口。可以保证不和server联调的情况下完成开发任务。配合mockjs使用有奇效。下面的数据是从localhost:8080/test/api得到的
         </h1>
       </li>
-      <li>姓名：{{ user.username }}</li>
-      <li>生日：{{ user.birthday }}</li>
-      <li>性别：{{ user.sex === 1 ? '男' : '女' }}</li>
+      <li v-for="(item, index) in userList" :key="index">
+        <span>姓名：{{ item.name }}</span>
+        <span>性别：{{ item.sex }}</span>
+        <span>年龄：{{ item.age }}</span>
+      </li>
     </ul>
     <br />
     <br />
@@ -87,6 +89,7 @@ export default {
   data() {
     return {
       user: {},
+      userList: [],
       imgList: [
         {
           alt: 'test0.jpg',
@@ -120,8 +123,11 @@ export default {
       await HelloWorld().then(({ data }) => {
         this.exampleAxios = data
       })
-      await axios.get('/test/api').then(({ data }) => {
-        this.user = data
+      await axios.get('/userList').then(({ data }) => {
+        this.userList = data.userList
+      })
+      await axios.get('/user').then(({ data }) => {
+        console.log(data)
       })
     }
   },
