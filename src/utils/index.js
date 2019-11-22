@@ -226,7 +226,6 @@ function compare(property, mode = -1) {
  */
 function flattenArray_object(arr, key, callback) {
   let result = []
-
   for (const item1 of arr) {
     let flag = true
     for (const item2 of result) {
