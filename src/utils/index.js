@@ -12,7 +12,8 @@ export {
   RGB2Hex, // rgb转16进制
   debounce, // 防抖
   throttle, // 节流
-  compare // 对象按照某个键值排序
+  compare, // 对象按照某个键值排序
+  flattenArray_object // 数组对象按照key值去重
 }
 
 // uuid() => "621dc209-1371-4602-97a5-04c913acc274"
@@ -196,4 +197,47 @@ function compare(property, mode = -1) {
       return value2 - value1
     }
   }
+}
+/**
+ * 数组对象删除value只保留唯一key值，并对删除的部分进行操作
+ * @param {array} arr 需要处理的数组
+ * @param {string} key 操作的key
+ * @param {function} callback 处理重复的对象的回调函数
+ * @callback
+ * @param {*} resVal 最终将保留的值
+ * @param {*} delVal 作为重复数据将被删除的值
+ * @example
+ * let arr = [
+ *   {from: '四川', name: '熊猫'},
+ *   {from: '四川', name: '辣椒'},
+ *   {from: '山西', name: '煤'},
+ *   {from: '山西',name: '醋'},
+ *   {from: '新疆',name: '葡萄'}
+ * ]
+ * flattenArray_object(arr, 'from',(resVal, delVal) => {
+ *   item2.name = resVal.name + '-' + delVal.name
+ * })
+ * =>
+ * [
+ *   {"from":"四川","name":"熊猫-辣椒"},
+ *   {"from":"山西","name":"煤-醋"},
+ *   {"from":"新疆","name":"葡萄"}
+ * ]
+ */
+function flattenArray_object(arr, key, callback) {
+  let result = []
+
+  for (const item1 of arr) {
+    let flag = true
+    for (const item2 of result) {
+      if (item1[key] === item2[key]) {
+        flag = false
+        callback(item2, item1)
+      }
+    }
+    if (flag) {
+      result.push(item1)
+    }
+  }
+  return result
 }
