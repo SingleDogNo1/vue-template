@@ -13,7 +13,8 @@ export {
   debounce, // 防抖
   throttle, // 节流
   compare, // 对象按照某个键值排序
-  flattenArray_object // 数组对象按照key值去重
+  flattenArray_object, // 数组对象按照key值去重
+  toThousand // 11111 => "11,111"
 }
 
 // uuid() => "621dc209-1371-4602-97a5-04c913acc274"
@@ -135,7 +136,7 @@ function getQueryParameter(url = window.location.href, name) {
 function removeArrValue(arr, val) {
   for (let i = 0; i < arr.length; i++) {
     // 处理数字
-    if (arr[i].toString() == val.toString()) {
+    if (arr[i].toString() === val.toString()) {
       arr.splice(i, 1)
       break
     }
@@ -239,4 +240,9 @@ function flattenArray_object(arr, key, callback) {
     }
   }
   return result
+}
+
+// 11111 => "11,111"
+function toThousand(num) {
+  return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }

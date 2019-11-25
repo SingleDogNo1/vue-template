@@ -4,6 +4,7 @@
 
 ### 脚手架默认添加功能
 + 默认添加了vue-router && vuex
++ 配置了404路由
 + 使用.editorconfig统一编辑格式
 + 使用[node-sass](https://lost-dream.github.io/blog/2017/10/20/使用SASS/)作为css预处理器
 + 使用eslint + prettier 作为代码规范工具并添加了默认的lint规则
@@ -20,7 +21,7 @@
 + 增加了基础的mixins(ROOT/src/assets/css/mixins.scss)和项目全局css变量（ROOT/src/assets/css/var.scss）
 + var.scss 和 mixins.scss 已添加到全局，无需引用
 + 使用[vue-lazyload](https://www.npmjs.com/package/vue-lazyload)处理图片懒加载，配置在`main.js`, loading和error占位图自行补充
-+ 引入了[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)分析项目,`npm run serve`运行之后在8888端口可以查看项目具体结构
++ 引入了[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)分析项目,`npm run build`运行之后在8888端口可以查看项目具体结构
 + 在生产环境配置了gzip，该功能对体积大于10k的文件进一步压缩，得到\*\*.gz文件，**但是想要真正加载gzip文件，需要服务端进行相应的配置 -- 根据Request Headers的Accept-Encoding标签进行鉴别，如果支持gzip就返回 \*\*.gz文件**
 + 使用cdn引入Vue、VueRouter、Vuex、axios、ElementUI，减少vendor.js体积
 + 基于axios配置了基础的请求文件`/src/utils/request.js`,根据实际开发场景做具体的修整

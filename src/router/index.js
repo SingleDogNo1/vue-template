@@ -1,5 +1,4 @@
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import notFound from './404'
 
 Vue.use(VueRouter)
 
@@ -13,7 +12,8 @@ const routes = [
     path: '/about',
     name: 'about',
     component: () => import(/* webpackChunkName: "about" */ '@/views/About')
-  }
+  },
+  ...notFound
 ]
 
 const router = new VueRouter({
