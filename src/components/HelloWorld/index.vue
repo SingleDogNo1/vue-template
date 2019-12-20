@@ -129,6 +129,14 @@ export default {
       await axios.get('/user').then(({ data }) => {
         console.log(data)
       })
+      await axios
+        .post('/wiki-backend/api/entry/getByVersionId', {
+          entryId: 'd022c9ec-ea58-11e9-9929-0242ac120002',
+          versionId: '947c32f8-07ed-6296-e050-007f01000062'
+        })
+        .then(res => {
+          console.log(res)
+        })
     }
   },
   mounted() {

@@ -103,6 +103,13 @@ module.exports = {
     disableHostCheck: true,
     before(app) {
       MockData(app)
+    },
+    proxy: {
+      '/': {
+        target: 'http://106.12.208.84:8080/',
+        changeOrigin: true,
+        wx: true
+      }
     }
   }
 }
