@@ -1,7 +1,7 @@
 import { Message } from 'element-ui'
-
+console.log(process.env)
 const http = axios.create({
-  baseURL: process.env.VUE_APP_REQUEST_URL,
+  baseURL: process.env.MOCK ? '/' : process.env.VUE_APP_REQUEST_URL,
   timeout: 1000 * 30,
   headers: {
     'Content-Type': 'application/json; charset=utf-8'

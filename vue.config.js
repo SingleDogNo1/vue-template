@@ -64,6 +64,18 @@ module.exports = {
       })
       .end()
 
+    if (env.VUE_APP_RUNTIME_ENV === 'development') {
+      config.plugin('define').tap(args => {
+        args[0]['process.env'].MOCK = true
+        return args
+      })
+    } else {
+      config.plugin('define').tap(args => {
+        args[0]['process.env'].MOCK = false
+        return args
+      })
+    }
+
     if (env.NODE_ENV === 'production') {
       config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin)
     }
@@ -102,7 +114,9 @@ module.exports = {
     host: '0.0.0.0',
     disableHostCheck: true,
     before(app) {
-      MockData(app)
+      if (env.MOCK) {
+        MockData(app)
+      }
     },
     proxy: {
       '/': {
